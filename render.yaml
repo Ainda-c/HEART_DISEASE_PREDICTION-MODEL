@@ -5,7 +5,7 @@ services:
     buildCommand: |
       python --version
       pip install --upgrade pip setuptools wheel
-      pip install -r requirements.txt
+      pip install --only-binary=all -r requirements.txt
       npm install
       npm run build
     startCommand: python app.py 
