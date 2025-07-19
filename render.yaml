@@ -4,7 +4,7 @@ services:
     env: python
     buildCommand: |
       pip install --upgrade pip setuptools wheel
-      pip install --only-binary=all -r requirements.txt || pip install -r requirements.txt
+      pip install --only-binary=all -r requirements.txt
       npm install
       npm run build
     startCommand: python app.py 
