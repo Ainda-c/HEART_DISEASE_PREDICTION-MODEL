@@ -1,6 +1,5 @@
 from flask import Flask, request, jsonify, render_template, send_from_directory
 from flask_cors import CORS
-import pandas as pd
 import joblib
 import os
 import numpy as np
@@ -9,19 +8,15 @@ app = Flask(__name__)
 CORS(app)
 
 #load model and scaler
-
 model = joblib.load('heart_disease_model.pkl')
 scaler = joblib.load('scaler.pkl')
 
 # Define feature order for input
-
 feature_order = ['age', 'sex', 'cp', 'trestbps', 'chol', 'fbs', 'restecg', 'thalch', 'exang', 'oldpeak']
-@app.route('/')
 
+@app.route('/')
 def home():
-        
-        return send_from_directory('dist', 'index.html')
-    
+    return send_from_directory('dist', 'index.html')
 
 @app.route('/predict', methods = ['POST'])
 def predict():
@@ -29,15 +24,15 @@ def predict():
         #Get JSON Data
         data = request.get_json()
 
-          # Create DataFrame with correct feature order
-        input_data = pd.DataFrame([data], columns=feature_order)
+        # Create numpy array with correct feature order
+        input_data = np.array([[data[feature] for feature in feature_order]])
         
-         # Preprocess input
+        # Preprocess input
         input_transformed = scaler.transform(input_data)
 
         # Make prediction
         prediction = model.predict(input_transformed)[0]
-        probabilities= model.predict_proba(input_transformed)[0]
+        probabilities = model.predict_proba(input_transformed)[0]
         probability = probabilities[int(prediction)]
 
         # Return result
