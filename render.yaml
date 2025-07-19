@@ -2,5 +2,10 @@ services:
   - type: web
     name: heart-disease-prediction
     env: python
-    buildCommand: chmod +x build.sh && ./build.sh
+    buildCommand: |
+      python --version
+      pip install --upgrade pip
+      pip install -r requirements.txt
+      npm install
+      npm run build
     startCommand: python app.py 
