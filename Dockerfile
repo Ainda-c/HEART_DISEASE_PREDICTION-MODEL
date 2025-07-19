@@ -1,5 +1,5 @@
-# Use Python 3.13 slim image
-FROM python:3.13-slim
+# Use Python 3.11 slim image (more stable than 3.13)
+FROM python:3.11-slim
 
 # Set working directory
 WORKDIR /app
@@ -21,9 +21,9 @@ RUN pip --version
 # Copy requirements first for better caching
 COPY requirements.txt .
 
-# Upgrade pip and install Python dependencies with pre-compiled wheels
+# Upgrade pip and install Python dependencies
 RUN pip install --upgrade pip setuptools wheel
-RUN pip install --only-binary=all --verbose -r requirements.txt
+RUN pip install -r requirements.txt
 
 # Copy package files
 COPY package*.json ./

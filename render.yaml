@@ -1,0 +1,7 @@
+services:
+  - type: web
+    name: heart-disease-prediction
+    env: docker
+    dockerfilePath: ./Dockerfile
+    dockerContext: .
+    port: 5000 
