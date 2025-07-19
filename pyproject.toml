@@ -6,7 +6,7 @@ build-backend = "setuptools.build_meta"
 name = "heart-disease-prediction"
 version = "1.0.0"
 description = "Heart Disease Prediction App"
-requires-python = ">=3.8,<3.11"
+requires-python = ">=3.8,<3.10"
 
 [tool.setuptools.packages.find]
 where = ["."]
