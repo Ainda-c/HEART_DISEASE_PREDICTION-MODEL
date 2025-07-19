@@ -1,6 +1,0 @@
-services:
-  - type: web
-    name: heart-disease-prediction
-    env: python
-    buildCommand: chmod +x build.sh && ./build.sh
-    startCommand: python app.py 
