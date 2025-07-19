@@ -1,12 +1,12 @@
 [build-system]
-requires = ["setuptools>=65.0.0", "wheel>=0.38.0"]
+requires = ["setuptools>=61.0", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
 name = "heart-disease-prediction"
 version = "1.0.0"
 description = "Heart Disease Prediction App"
-requires-python = ">=3.8,<3.12"
+requires-python = ">=3.8"
 
 [tool.setuptools.packages.find]
 where = ["."]
