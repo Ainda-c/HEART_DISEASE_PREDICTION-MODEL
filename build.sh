@@ -1,19 +1,15 @@
 #!/bin/bash
+set -e
 
-# Check Python version
-echo "Python version:"
-python --version
+echo "Upgrading pip, setuptools, and wheel..."
+pip install --upgrade pip setuptools wheel
 
-# Install Python dependencies with specific versions
-echo "Installing Python dependencies..."
-pip install --upgrade pip
-pip install -r requirements.txt
+echo "Installing Python dependencies with --only-binary=all..."
+pip install --only-binary=all -r requirements.txt
 
-# Install Node.js dependencies
 echo "Installing Node.js dependencies..."
 npm install
 
-# Build the React app
 echo "Building React app..."
 npm run build
 

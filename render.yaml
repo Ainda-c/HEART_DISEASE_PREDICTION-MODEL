@@ -2,9 +2,5 @@ services:
   - type: web
     name: heart-disease-prediction
     env: python
-    buildCommand: |
-      pip install --upgrade pip setuptools wheel
-      pip install --only-binary=all -r requirements.txt
-      npm install
-      npm run build
+    buildCommand: chmod +x build.sh && ./build.sh
     startCommand: python app.py 
