@@ -3,9 +3,4 @@ services:
     name: heart-disease-prediction
     env: python
     buildCommand: chmod +x build.sh && ./build.sh
-    startCommand: python app.py
-    envVars:
-      - key: PYTHON_VERSION
-        value: 3.10.12
-      - key: PORT
-        value: 10000 
+    startCommand: python app.py 
