@@ -3,7 +3,6 @@ services:
     name: heart-disease-prediction
     env: python
     buildCommand: |
-      python --version
       pip install --upgrade pip setuptools wheel
       pip install --only-binary=all -r requirements.txt
       npm install
