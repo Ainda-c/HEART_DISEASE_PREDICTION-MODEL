@@ -4,11 +4,11 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Alert, AlertDescription } from '@/components/ui/alert';
-import { Heart, Eye, EyeOff, AlertCircle, UserPlus } from 'lucide-react';
+import { Heart, Eye, EyeOff, AlertCircle, CheckCircle2, ArrowLeft } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 
 interface RegisterFormData {
-  fullName: string;
+  name: string;
   email: string;
   password: string;
   confirmPassword: string;
@@ -16,13 +16,13 @@ interface RegisterFormData {
 
 interface RegisterPageProps {
   onRegisterSuccess: () => void;
-  onLoginClick: () => void;
+  onBackToLogin: () => void;
 }
 
-const RegisterPage = ({ onRegisterSuccess, onLoginClick }: RegisterPageProps) => {
+const RegisterPage = ({ onRegisterSuccess, onBackToLogin }: RegisterPageProps) => {
   const { toast } = useToast();
   const [formData, setFormData] = useState<RegisterFormData>({
-    fullName: '',
+    name: '',
     email: '',
     password: '',
     confirmPassword: ''
@@ -35,8 +35,8 @@ const RegisterPage = ({ onRegisterSuccess, onLoginClick }: RegisterPageProps) =>
   const validateForm = (): boolean => {
     const newErrors: Partial<RegisterFormData> = {};
     
-    if (!formData.fullName.trim()) {
-      newErrors.fullName = 'Full name is required';
+    if (!formData.name.trim()) {
+      newErrors.name = 'Name is required';
     }
     
     if (!formData.email) {
@@ -50,7 +50,7 @@ const RegisterPage = ({ onRegisterSuccess, onLoginClick }: RegisterPageProps) =>
     } else if (formData.password.length < 6) {
       newErrors.password = 'Password must be at least 6 characters';
     }
-    
+
     if (!formData.confirmPassword) {
       newErrors.confirmPassword = 'Please confirm your password';
     } else if (formData.password !== formData.confirmPassword) {
@@ -81,13 +81,13 @@ const RegisterPage = ({ onRegisterSuccess, onLoginClick }: RegisterPageProps) =>
       
       toast({
         title: "Registration Successful",
-        description: "Welcome to HeartCare AI! Your account has been created.",
+        description: "Account created successfully! Welcome to HeartCare AI.",
       });
       onRegisterSuccess();
     } catch (error) {
       toast({
         title: "Registration Failed",
-        description: "Something went wrong. Please try again.",
+        description: "Failed to create account. Please try again.",
         variant: "destructive"
       });
     } finally {
@@ -116,7 +116,7 @@ const RegisterPage = ({ onRegisterSuccess, onLoginClick }: RegisterPageProps) =>
             HeartCare AI
           </h1>
           <p className="text-gray-600 text-lg">
-            Advanced cardiovascular risk assessment
+            Create your account
           </p>
         </div>
 
@@ -132,24 +132,24 @@ const RegisterPage = ({ onRegisterSuccess, onLoginClick }: RegisterPageProps) =>
           
           <CardContent className="px-6 pb-6 pt-6">
             <form onSubmit={handleSubmit} className="space-y-4">
-              {/* Full Name Field */}
+              {/* Name Field */}
               <div className="space-y-2">
-                <Label htmlFor="fullName" className="text-sm font-medium">
+                <Label htmlFor="name" className="text-sm font-medium">
                   Full Name
                 </Label>
                 <Input
-                  id="fullName"
+                  id="name"
                   type="text"
-                  value={formData.fullName}
-                  onChange={(e) => handleInputChange('fullName', e.target.value)}
+                  value={formData.name}
+                  onChange={(e) => handleInputChange('name', e.target.value)}
                   placeholder="Enter your full name"
-                  className={`w-full py-2 text-sm ${errors.fullName ? 'border-destructive focus:ring-destructive' : ''}`}
+                  className={`w-full py-2 text-sm ${errors.name ? 'border-destructive focus:ring-destructive' : ''}`}
                   disabled={isLoading}
                 />
-                {errors.fullName && (
+                {errors.name && (
                   <p className="text-xs text-destructive flex items-center gap-1">
                     <AlertCircle className="h-3 w-3" />
-                    {errors.fullName}
+                    {errors.name}
                   </p>
                 )}
               </div>
@@ -258,11 +258,11 @@ const RegisterPage = ({ onRegisterSuccess, onLoginClick }: RegisterPageProps) =>
                 {isLoading ? (
                   <>
                     <div className="w-4 h-4 border-2 border-primary-foreground border-t-transparent rounded-full animate-spin mr-2" />
-                    Creating account...
+                    Creating Account...
                   </>
                 ) : (
                   <>
-                    <UserPlus className="w-4 h-4 mr-2"/>
+                    <CheckCircle2 className="w-4 h-4 mr-2"/>
                     Create Account
                   </>
                 )}
@@ -279,28 +279,29 @@ const RegisterPage = ({ onRegisterSuccess, onLoginClick }: RegisterPageProps) =>
               </div>
             </div>
 
-            {/* Login Button */}
+            {/* Back to Login Button */}
             <Button 
               type="button"
               variant="outline"
               className="w-full border-2 border-[#2bb6f6] text-[#2bb6f6] hover:bg-[#2bb6f6] hover:text-white transition-all duration-300"
-              onClick={onLoginClick}
+              onClick={onBackToLogin}
               disabled={isLoading}
               size="lg"
             >
-              Sign In to Existing Account
+              <ArrowLeft className="w-4 h-4 mr-2" />
+              Back to Login
             </Button>
           </CardContent>
         </Card>
 
-        {/* Terms */}
+        {/* Demo Info */}
         <div className="mt-6 text-center">
-          <p className="text-xs text-gray-500">
-            By creating an account, you agree to our{' '}
-            <button className="text-[#2bb6f6] hover:underline">Terms of Service</button>
-            {' '}and{' '}
-            <button className="text-[#2bb6f6] hover:underline">Privacy Policy</button>
-          </p>
+          <Alert className="border-blue-200 bg-blue-50">
+            <AlertCircle className="h-4 w-4 text-blue-600" />
+            <AlertDescription className="text-sm text-blue-800">
+              <strong>Demo:</strong> Fill in all fields with valid data to create an account
+            </AlertDescription>
+          </Alert>
         </div>
       </div>
     </div>
