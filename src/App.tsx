@@ -47,7 +47,7 @@ const App = () => {
                 ) : showRegister ? (
                   <RegisterPage 
                     onRegisterSuccess={handleLoginSuccess}
-                    onLoginClick={handleBackToLogin}
+                    onBackToLogin={handleBackToLogin}
                   />
                 ) : (
                   <LoginPage 
