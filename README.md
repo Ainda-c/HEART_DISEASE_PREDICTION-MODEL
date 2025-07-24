@@ -30,7 +30,7 @@ An AI-powered heart disease risk assessment tool built with React frontend and F
    python app.py
    ```
 
-3. Open http://localhost:5000
+3. Open [http://localhost:5000](https://heart-disease-prediction-q1v7.onrender.com/)
 
 ## Deployment on Render
 
